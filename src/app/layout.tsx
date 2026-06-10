@@ -7,6 +7,7 @@ import { Toaster } from "sonner";
 import QueryProvider from "./providers";
 import { NotificationProvider } from "@/context/NotificationContext";
 import { SITE_NAME, SITE_URL, SITE_DESCRIPTION } from "@/constants";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -71,7 +72,9 @@ export default function RootLayout({
         <QueryProvider>
           <AuthProvider>
             <NotificationProvider>
+               <Suspense fallback={<div>Loading...</div>}>
               <MainNavigation>{children}</MainNavigation>
+              </Suspense>
             </NotificationProvider>
             <Toaster position='top-right' />
           </AuthProvider>

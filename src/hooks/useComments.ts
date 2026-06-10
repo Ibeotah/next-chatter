@@ -92,7 +92,7 @@ export function useAddComment(postId: string) {
               ? {
                 // ✅ Uses profile from useAuth
                 name: profile.name,
-                avatar_url: profile.avatar_url,
+                avatar_url: profile.avatar_url ?? "",
                 username: profile.username,
               }
               : undefined,
