@@ -27,39 +27,6 @@ export function useFollows() {
     enabled: !!user, // Only run query if a user is logged in
   });
 
-  // 2. FOLLOW MUTATION
-  // const followMutation = useMutation({
-  //   mutationFn: async (authorId: string) => {
-  //     if (!user) throw new Error("You must be logged in to follow authors.");
-
-  //     const { data, error } = await supabase
-  //       .from("author_follows")
-  //       .insert([{ follower_id: user.id, following_id: authorId }])
-  //       .select();
-
-  //     if (error) throw new Error(error.message || "Create a Profile");
-  //     return data;
-  //   },
-  //   onSuccess: () => {
-  //     toast.success("Successfully followed author!");
-  //     // Invalidate both lists to trigger UI re-renders instantly
-  //     queryClient.invalidateQueries({
-  //       queryKey: ["followedAuthors", user?.id],
-  //     });
-  //     queryClient.invalidateQueries({ queryKey: ["posts", "discovery"] });
-  //   },
-  //   onError: (error: any) => {
-  //     // Check if the error message mentions the follower foreign key constraint
-  //     if (error.message?.includes("author_follows_follower_id_fkey")) {
-  //       toast.error(
-  //         "Please complete setting up your profile before following authors!",
-  //       );
-  //     } else {
-  //       // Fallback for any other unexpected database or network errors
-  //       toast.error(error.message || "Failed to follow author.");
-  //     }
-  //   },
-  // });
   const { requireProfile } = useProfileGuard();
 
   const followMutation = useMutation({

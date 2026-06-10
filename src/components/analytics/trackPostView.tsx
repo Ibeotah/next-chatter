@@ -9,27 +9,6 @@ interface TrackPostViewProps {
   postId: string;
 }
 
-/**
- * TRACKPOSTVIEW — Invisible analytics component
- *
- * Fires a single ping to the track-view edge function when an
- * authenticated user lands on a post detail page.
- *
- * Design decisions:
- * - useAuth() gives us `user` to confirm authentication state
- *   before we attempt anything. If user is null, we bail immediately.
- * - We use the shared `supabase` singleton (createBrowserClient) from
- *   @/lib/supabase/client — consistent with your app's pattern.
- * - AuthContext does not expose session directly, so we call
- *   supabase.auth.getSession() to get the JWT access token.
- *   This is not a redundant network call — getSession() reads
- *   from the local session cache, it does not hit the network.
- * - The JWT is sent in the Authorization header so the edge function
- *   can verify the user server-side independently.
- * - useRef guards against React Strict Mode double-firing in dev.
- * - Silent fail on any error — analytics must never disrupt reading.
- */
-
 export default function TrackPostView({ postId }: TrackPostViewProps) {
   const { user } = useAuth();
   const hasFired = useRef(false);
@@ -73,18 +52,7 @@ export default function TrackPostView({ postId }: TrackPostViewProps) {
           },
         );
 
-        // if (!response.ok) {
-        //   toast.warning(
-        //     "[TrackPostView] Ping failed with status:",
-        //     response.status
-        //   );
-        // }
         if (!response.ok) {
-        //   console.warn(
-        //     "[TrackPostView] Ping failed with status:",
-        //     response.status,
-        //   );
-
           toast.warning("Something went wrong while loading this page.", {
             description:
               "Don't worry — your reading experience isn't affected.",

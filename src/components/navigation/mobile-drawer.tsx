@@ -63,10 +63,7 @@ export function MobileDrawer({ pathname, onSignOut }: MobileDrawerProps) {
                         ? "bg-blue-50 text-brand-primary"
                         : "text-slate-700 hover:bg-slate-50"
                     }
-                  `}
-                  // Active: text-brand-primary on bg-blue-50 → 4.8:1 ✅
-                  // Inactive: text-slate-700 on white → 10.7:1 ✅
-                >
+                  `}>
                   <Icon className='h-5 w-5' aria-hidden='true' />
                   {label}
                 </Link>

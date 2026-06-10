@@ -7,13 +7,12 @@ export default function QueryProvider({
 }: {
   children: React.ReactNode;
 }) {
-  // Use useState to ensure the client is only created once per session
   const [queryClient] = useState(
     () =>
       new QueryClient({
         defaultOptions: {
           queries: {
-            staleTime: 60 * 1000, // 1 minute
+            staleTime: 60 * 1000,
           },
         },
       }),

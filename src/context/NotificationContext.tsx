@@ -1,24 +1,3 @@
-// 'use client';
-
-// import { useNotificationSubscription } from '@/hooks/useNotificationSubscription';
-// import { createContext, useContext, useState } from 'react';
-// import { useAuth } from './auth-context';
-
-// const NotificationContext = createContext<any>(null);
-
-// export const NotificationProvider = ({ children }: { children: React.ReactNode }) => {
-//    const { user } = useAuth(); // Get user from your existing AuthProvider
-//   const { unreadCount, setUnreadCount } = useNotificationSubscription(user?.id || '');
-//   return (
-//     <NotificationContext.Provider value={{ unreadCount, setUnreadCount }}>
-//       {children}
-//     </NotificationContext.Provider>
-//   );
-// };
-
-// export const useNotification = () => useContext(NotificationContext);
-
-// context/NotificationContext.tsx
 "use client";
 
 import { createContext, useContext, useMemo, type ReactNode } from "react";

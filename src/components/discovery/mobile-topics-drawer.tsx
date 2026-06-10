@@ -19,28 +19,7 @@ interface MobileTopicsDrawerProps {
   context: MobileTopicsDrawerContext;
 }
 
-/**
- * MobileTopicsDrawer
- *
- * A bottom sheet / expandable section shown on mobile and tablet
- * (hidden on lg+ where the sidebar is always visible).
- *
- * Why a drawer and not just showing the sidebar?
- * The sidebar has a large list of topics. On mobile it would push
- * the feed far down the page. A collapsible drawer gives users the
- * choice to open it when they want it.
- *
- * Accessibility:
- * - Toggle button: aria-expanded + aria-controls
- * - Drawer panel: role="region" with aria-label
- * - Escape closes the drawer and returns focus to trigger
- * - Focus trap is NOT used — this is not a modal
- *
- * WCAG 2.1 AA:
- * - All interactive elements have visible focus rings
- * - Text contrast meets AA minimums (annotated inline)
- */
-export function MobileTopicsDrawer({ context }: MobileTopicsDrawerProps) {
+ function MobileTopicsDrawer({ context }: MobileTopicsDrawerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const drawerId = useId();
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -115,11 +94,7 @@ export function MobileTopicsDrawer({ context }: MobileTopicsDrawerProps) {
       </button>
 
       {/* ── Collapsible drawer panel ── */}
-      {/*
-       * We use a CSS max-height transition for smooth open/close.
-       * The panel is always in the DOM (not conditionally rendered)
-       * so screen readers can reference it via aria-controls.
-       */}
+      
       <div
         id={drawerId}
         role="region"

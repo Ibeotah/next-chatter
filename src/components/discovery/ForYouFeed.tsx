@@ -25,13 +25,6 @@ interface ForYouFeedProps {
     followedTags: string[];
     handleTagToggle: (tag: string) => void;
     isTagMutationPending: boolean;
-    /*
-     * boolean | null because useProfileGuard returns null while
-     * auth is still resolving on refresh.
-     * null  = loading (unknown)
-     * false = confirmed incomplete
-     * true  = confirmed complete
-     */
     isProfileComplete: boolean | null;
   };
 }
@@ -78,10 +71,8 @@ export default function ForYouFeed({ context }: ForYouFeedProps) {
       {/* ── Active tag filter banner ── */}
       {activeTag && (
         <div className='flex items-center justify-between bg-brand-surface border border-brand-primary/20 rounded-xl p-4 animate-fadeIn'>
-          {/* slate-700 on brand-surface → 9.3:1 ✅ */}
           <span className='text-sm font-medium text-slate-700'>
             Showing posts tagged with{" "}
-            {/* brand-primary on brand-surface → 4.5:1 ✅ */}
             <span className='font-bold text-brand-primary'>#{activeTag}</span>
           </span>
           <button
@@ -131,7 +122,6 @@ export default function ForYouFeed({ context }: ForYouFeedProps) {
         <div
           role='alert'
           className='p-4 bg-red-50 border border-red-200 text-red-800 rounded-xl text-center'>
-          {/* red-800 on red-50 → 7.4:1 ✅ */}
           <p className='font-medium'>Unable to load the feed right now.</p>
           <p className='text-sm text-red-700 mt-1'>
             Please try refreshing the page.
@@ -142,11 +132,9 @@ export default function ForYouFeed({ context }: ForYouFeedProps) {
       {/* ── Empty state ── */}
       {isEmpty && (
         <div className='p-12 text-center bg-slate-50 border border-dashed border-slate-200 rounded-xl'>
-          {/* slate-700 on slate-50 → 9.35:1 ✅ */}
           <p className='text-slate-700 font-medium'>
             The discovery feed is quiet today.
           </p>
-          {/* slate-600 on slate-50 → 5.52:1 ✅ */}
           <p className='text-sm text-slate-600 mt-1'>
             Check back later for new published posts!
           </p>
@@ -297,10 +285,8 @@ export default function ForYouFeed({ context }: ForYouFeedProps) {
                                     "focus-visible:outline-none focus-visible:ring-1",
                                     "focus-visible:ring-brand-primary",
                                     isFilteringThisTag
-                                      ? // white on brand-primary → 4.56:1 ✅
-                                        "bg-brand-primary text-white"
-                                      : // slate-700 on slate-50 → 9.35:1 ✅
-                                        "text-slate-700 hover:bg-slate-200",
+                                      ? "bg-brand-primary text-white"
+                                      : "text-slate-700 hover:bg-slate-200",
                                   )}>
                                   # {tag}
                                 </button>
@@ -353,7 +339,7 @@ export default function ForYouFeed({ context }: ForYouFeedProps) {
                           </span>
                         )}
                       </div>
-                      
+
                       <div className='flex items-center gap-3 shrink-0'>
                         <div className='shrink-0'>
                           <LikeButton postId={post.id} />
@@ -395,7 +381,6 @@ export default function ForYouFeed({ context }: ForYouFeedProps) {
                               focus-visible:ring-brand-primary
                               focus-visible:ring-offset-1 rounded
                             '>
-                            {/* brand-primary on white → 4.56:1 ✅ */}
                             Read story →
                           </button>
                         ) : (
@@ -410,10 +395,6 @@ export default function ForYouFeed({ context }: ForYouFeedProps) {
                               focus-visible:ring-slate-400
                               focus-visible:ring-offset-1 rounded
                             '>
-                            {/*
-                             * slate-400 on white → 3.07:1
-                             * 14px bold = large text → ≥3:1 ✅
-                             */}
                             Read story →
                           </Link>
                         )}

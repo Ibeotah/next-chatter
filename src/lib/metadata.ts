@@ -8,7 +8,7 @@
 
 import type { Metadata } from "next";
 import { SITE_NAME, SITE_URL, SITE_DESCRIPTION } from "@/constants";
-import type { Post, Profile } from "@/types";
+import type { Post } from "@/types";
 
 // ─────────────────────────────────────────────
 // SECTION 1: URL Builders

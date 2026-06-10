@@ -96,7 +96,7 @@ export function useAddComment(postId: string) {
                 username: profile.username,
               }
               : undefined,
-            replies: [], // ✅ Empty array for new comments
+            replies: [],
           };
           return [...old, optimisticComment];
         },

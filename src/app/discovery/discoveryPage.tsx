@@ -1,7 +1,6 @@
 "use client";
 
 import { lazy, Suspense, useState } from "react";
-import { PREDEFINED_TAGS } from "@/constants";
 import { useAuth } from "@/context/auth-context";
 import { useFollows } from "@/hooks/useFollows";
 import { useFollowedTags, useToggleTagFollow } from "@/hooks/useTagFollows";
@@ -59,13 +58,6 @@ export default function DiscoveryPage() {
 
   const { data: followedTags = [] } = useFollowedTags(user?.id);
 
-  /**
-   * FIX: explicit type annotation on the mutation variable resolves
-   * the implicit `any` circular reference TypeScript error.
-   * The mutation is typed via useToggleTagFollow's return type,
-   * but referencing handleTagToggle inside itself caused the circularity.
-   * Solution: declare handleTagToggle as a typed const AFTER the mutation.
-   */
   const toggleTagMutation = useToggleTagFollow(user?.id);
 
   const handleFollowToggle = (authorId: string): void => {
@@ -200,27 +192,12 @@ export default function DiscoveryPage() {
         </div>
       </nav>
 
-      {/*
-       * ── MOBILE TOPICS DRAWER TRIGGER ──────────────────────────────
-       * Visible on mobile and tablet (< lg).
-       * Replaced the hidden aside with an accessible drawer trigger
-       * so users on small screens can still discover and follow topics.
-       * Hidden on lg+ where the sidebar is always visible.
-       */}
       <div className='lg:hidden mb-6'>
         <MobileTopicsDrawer context={topicsContext} />
       </div>
 
       {/* ── MAIN LAYOUT ── */}
-      {/*
-       * Grid breakdown:
-       *   < lg  → single column (feed takes full width)
-       *   ≥ lg  → 3 columns: feed = col-span-2, sidebar = col-span-1
-       *
-       * FIX for 1024px cutoff: changed from lg:grid-cols-3 with a
-       * fixed aside to a proper 2-column layout at lg using col-span.
-       * The aside now has min-w-0 to prevent grid blowout.
-       */}
+
       <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 items-start'>
         {/* Feed */}
         <main

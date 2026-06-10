@@ -6,20 +6,6 @@ import { markSingleNotificationAsRead } from "@/components/notifications/actions
 import { toast } from "sonner";
 import type { NotificationItem } from "@/types";
 
-/**
- * Marks a single notification as read by its `id`.
- *
- * Uses optimistic update:
- *   1. Immediately flips `is_read` to true in the React Query cache
- *      so the unread dot disappears instantly.
- *   2. Fires the server action in the background.
- *   3. Rolls back the cache entry if the server call fails.
- *   4. Invalidates the query on settle so the server state
- *      is the final source of truth.
- *
- * NOTE: This does NOT touch `unreadCount` in NotificationContext —
- * the bulk mark-all (triggered on bell open) already resets the badge.
- */
 export function useMarkSingleNotificationAsRead(userId: string) {
     const queryClient = useQueryClient();
 

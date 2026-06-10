@@ -1,156 +1,3 @@
-// "use client";
-
-// import { useId } from "react";
-// import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-// import { Label } from "@/components/ui/label";
-// import { FileText } from "lucide-react";
-// import { PREDEFINED_TAGS } from "@/constants";
-// import { UseTagsReturn } from "@/types";
-// import { useReadingTime } from "@/hooks/useReadingTime";
-
-// type UseTagsSelectedTagsAndOnToggle = Omit<UseTagsReturn, "setSelectedTags"> & {
-//   content: string;
-// };
-
-// export const TaxonomySidebar = ({
-//   selectedTags,
-//   toggleTag,
-//   content,
-// }: UseTagsSelectedTagsAndOnToggle) => {
-//   const { readingTime, wordCount } = useReadingTime(content);
-//   const tagGroupId = useId();
-//   const limitReached = selectedTags.length >= 5;
-
-//   return (
-//     <Card className='bg-white border-slate-200/80 shadow-sm'>
-//       <CardHeader className='pb-3 border-b border-slate-100'>
-//         <CardTitle className='text-xs font-bold uppercase tracking-wider text-slate-600'>
-//           Taxonomy Parameters
-//         </CardTitle>
-//       </CardHeader>
-
-//       <CardContent className='pt-4 space-y-4'>
-//         {/* ── TAG SELECTION ─────────────────────────────────────────── */}
-//         <div className='space-y-2'>
-//           <div className='flex items-center justify-between'>
-//             <Label
-//               htmlFor={tagGroupId}
-//               className='text-xs font-bold text-slate-700'>
-//               Assign Post Tags
-//             </Label>
-
-//             <span
-//               aria-live='polite'
-//               aria-atomic='true'
-//               aria-label={`${selectedTags.length} of 5 tags selected`}
-//               className={`
-//                 text-[11px] font-bold px-2 py-0.5 rounded
-//                 ${
-//                   limitReached
-//                     ? "bg-red-100 text-red-800"
-//                     : "bg-amber-100 text-amber-800"
-//                 }
-//               `}>
-//               {selectedTags.length}/5 {limitReached ? "limit reached" : "slots"}
-//             </span>
-//           </div>
-
-//           <div
-//             id={tagGroupId}
-//             role='group'
-//             aria-label='Post tags — select up to 5'
-//             className='flex flex-wrap gap-1.5'>
-//             {PREDEFINED_TAGS.map((tag) => {
-//               const isSelected = selectedTags.includes(tag);
-//               const isDisabled = !isSelected && limitReached;
-
-//               return (
-//                 <button
-//                   key={tag}
-//                   type='button'
-//                   onClick={() => !isDisabled && toggleTag(tag)}
-//                   aria-pressed={isSelected}
-//                   aria-disabled={isDisabled}
-//                   aria-label={
-//                     isSelected
-//                       ? `Remove tag ${tag}`
-//                       : isDisabled
-//                         ? `Cannot add ${tag}, tag limit reached`
-//                         : `Add tag ${tag}`
-//                   }
-//                   className={`
-//                     text-[11px] px-2.5 py-1 rounded-md font-semibold
-//                     border transition-all duration-150
-//                     focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1
-//                     ${
-//                       isSelected
-//                         ? `
-//                           bg-brand-primary hover:bg-brand-primary-hover
-//                           text-white border-transparent
-//                           focus-visible:ring-brand-primary
-//                           /* white on brand-primary #0066fe → 4.56:1 ✅
-//                              FIXED: was bg-[#0066fe] hardcoded hex ❌ */
-//                         `
-//                         : isDisabled
-//                           ? `
-//                             bg-slate-50 text-slate-400 border-slate-200
-//                             cursor-not-allowed opacity-60
-//                             focus-visible:ring-slate-300
-//                           `
-//                           : `
-//                             bg-white hover:bg-slate-50
-//                             text-slate-600 border-slate-300
-//                             cursor-pointer
-//                             focus-visible:ring-brand-primary
-//                             /* FIXED: was text-slate-500 → 4.48:1 ❌ (just misses 4.5:1)
-//                                Now:       text-slate-600 → 5.91:1 ✅ */
-//                           `
-//                     }
-//                   `}>
-//                   {isSelected ? `✓ ${tag}` : `+ ${tag}`}
-//                 </button>
-//               );
-//             })}
-//           </div>
-
-//           {limitReached && (
-//             <p role='alert' className='text-[11px] font-medium text-red-800'>
-//                Maximum 5 tags selected. Remove a tag to add another.
-//             </p>
-//           )}
-//         </div>
-
-//         {/* Divider */}
-//         <div className='h-px bg-slate-100' role='separator' />
-
-//         {/* ── READING STATS ──────────────────────────────────────────── */}
-//         <div
-//           className='bg-slate-50 p-3 rounded-lg border border-slate-200 flex items-center justify-between'
-//           aria-label={`Reading statistics: ${readingTime} minute read, ${wordCount} words`}>
-//           <div className='flex items-center gap-2'>
-//             <FileText className='h-4 w-4 text-slate-500' aria-hidden='true' />
-
-//             <span className='text-xs font-semibold text-slate-700'>
-//               Reading Stats
-//             </span>
-//           </div>
-
-//           <div
-//             className='flex items-center gap-1 bg-white border border-slate-200 px-2.5 py-1 rounded-md'
-//             aria-hidden='true'>
-//             <span className='text-xs font-bold text-slate-900'>
-//               {readingTime} min read
-//             </span>
-//             <span className='text-[11px] font-medium text-slate-500'>
-//               · {wordCount} words
-//             </span>
-//           </div>
-//         </div>
-//       </CardContent>
-//     </Card>
-//   );
-// };
-
 "use client";
 
 import { useId, useState, useRef } from "react";
@@ -165,12 +12,6 @@ import { useCreateCustomTag } from "@/hooks/useTagFollows";
 
 type UseTagsSelectedTagsAndOnToggle = Omit<UseTagsReturn, "setSelectedTags"> & {
   content: string;
-  /*
-   * toggleTag here handles BOTH predefined AND custom tags.
-   * It already lives in useTags — no changes needed to that hook.
-   * When we add a custom tag via useCreateCustomTag, we also call
-   * toggleTag(tagName) to add it to the post's selectedTags array.
-   */
 };
 
 export const TaxonomySidebar = ({
@@ -264,7 +105,6 @@ export const TaxonomySidebar = ({
     <Card className='bg-white border-slate-200/80 shadow-sm'>
       <CardHeader className='pb-3 border-b border-slate-100'>
         <CardTitle className='text-xs font-bold uppercase tracking-wider text-slate-600'>
-          {/* slate-600 on white → 5.91:1 ✅ */}
           Taxonomy Parameters
         </CardTitle>
       </CardHeader>
@@ -276,7 +116,6 @@ export const TaxonomySidebar = ({
             <Label
               htmlFor={tagGroupId}
               className='text-xs font-bold text-slate-700'>
-              {/* slate-700 on white → 10.3:1 ✅ */}
               Assign Post Tags
             </Label>
 
@@ -293,9 +132,7 @@ export const TaxonomySidebar = ({
                 ${
                   limitReached
                     ? "bg-red-100 text-red-800"
-                    : /* red-800 on red-100 → 7.89:1 ✅ */
-                      "bg-amber-100 text-amber-800"
-                  /* amber-800 on amber-100 → 6.17:1 ✅ */
+                    : "bg-amber-100 text-amber-800"
                 }
               `}>
               {selectedTags.length}/5 {limitReached ? "limit reached" : "slots"}
@@ -337,11 +174,9 @@ export const TaxonomySidebar = ({
                     ${
                       isSelected
                         ? "bg-brand-primary hover:bg-brand-primary-hover text-white border-transparent focus-visible:ring-brand-primary"
-                        : /* white on brand-primary → 4.56:1 ✅ */
-                          isDisabled
+                        : isDisabled
                           ? "bg-slate-50 text-slate-400 border-slate-200 cursor-not-allowed opacity-60 focus-visible:ring-slate-300"
                           : "bg-white hover:bg-slate-50 text-slate-600 border-slate-300 cursor-pointer focus-visible:ring-brand-primary"
-                      /* slate-600 on white → 5.91:1 ✅ */
                     }
                   `}>
                   {isSelected ? `✓ ${tag}` : `+ ${tag}`}
@@ -383,7 +218,6 @@ export const TaxonomySidebar = ({
           {/* Limit reached alert */}
           {limitReached && (
             <p role='alert' className='text-[11px] font-medium text-red-800'>
-              {/* red-800 on white → 7.89:1 ✅ */}
               Maximum 5 tags selected. Remove a tag to add another.
             </p>
           )}
@@ -521,26 +355,19 @@ export const TaxonomySidebar = ({
           aria-label={`Reading statistics: ${readingTime} minute read, ${wordCount} words`}>
           <div className='flex items-center gap-2'>
             <FileText className='h-4 w-4 text-slate-500' aria-hidden='true' />
-            {/* slate-500 on slate-50 → 4.1:1 — icon, ≥3:1 UI rule ✅ */}
             <span className='text-xs font-semibold text-slate-700'>
-              {/* slate-700 on slate-50 → 9.35:1 ✅ */}
               Reading Stats
             </span>
           </div>
 
-          {/*
-           * aria-hidden on the inner display — the parent div's aria-label
-           * already provides the full reading to screen readers.
-           */}
           <div
             className='flex items-center gap-1 bg-white border border-slate-200 px-2.5 py-1 rounded-md'
             aria-hidden='true'>
             <span className='text-xs font-bold text-slate-900'>
-              {/* slate-900 on white → 17.85:1 ✅ */}
               {readingTime} min read
             </span>
             <span className='text-[11px] font-medium text-slate-500'>
-              {/* slate-500 on white → 4.48:1 ✅ */}· {wordCount} words
+              · {wordCount} words
             </span>
           </div>
         </div>

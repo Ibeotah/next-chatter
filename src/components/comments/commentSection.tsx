@@ -17,9 +17,7 @@ export default function CommentSection({ postId }: { postId: string }) {
   const { data: comments, isLoading } = useComments(postId);
   const { mutate: addComment } = useAddComment(postId);
   const { mutate: deleteComment } = useDeleteComment(postId);
-  //   const handleSubmit = (content: string, parentId?: string) => {
-  //     addComment({ content, parentId });
-  //   };
+
   const handleSubmit = (content: string, parentId?: string) => {
     setReplyingToId(parentId ?? null);
 
@@ -31,9 +29,6 @@ export default function CommentSection({ postId }: { postId: string }) {
     );
   };
 
-  //   const handleDelete = (commentId: string) => {
-  //     deleteComment(commentId);
-  //   };
   const handleDelete = (commentId: string) => {
     setDeletingId(commentId);
     deleteComment(commentId, {
@@ -83,7 +78,6 @@ export default function CommentSection({ postId }: { postId: string }) {
           key={comment.id}
           comment={comment}
           onDelete={handleDelete}
-          // onReply={(content) => handleSubmit(content, comment.id)}
           onReply={handleSubmit}
           replyingToId={replyingToId}
           deletingId={deletingId}

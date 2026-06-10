@@ -1,4 +1,3 @@
-
 "use client";
 
 import { PREDEFINED_TAGS } from "@/constants";
@@ -16,20 +15,6 @@ interface ExploreTopicsProps {
   context: ExploreTopicsContext;
 }
 
-/**
- * ExploreTopics — desktop sidebar (lg+)
- *
- * FIX: Removed `hidden lg:block` from here — visibility is controlled
- * by the parent (discovery/page.tsx) so this component is reusable
- * in both the sidebar AND the mobile drawer without className overrides.
- *
- * FIX: Added `overflow-hidden` on the outer wrapper and `min-w-0` on
- * the aside so the grid column never blows out at 1024px.
- *
- * FIX: Tag list is now `max-h-[60vh] overflow-y-auto` so if PREDEFINED_TAGS
- * is long it scrolls within the sticky card rather than pushing content
- * off screen.
- */
 export function ExploreTopics({ context }: ExploreTopicsProps) {
   const {
     followedTags,

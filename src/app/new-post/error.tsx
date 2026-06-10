@@ -1,21 +1,13 @@
-"use client";
-
-import { useEffect } from "react";
 import { AlertTriangle, RefreshCw, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
 
 export default function NewPostError({
-  error,
   reset,
 }: {
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  useEffect(() => {
-    console.error("[/new-post] route error:", error?.message ?? error);
-  }, [error]);
-
   return (
     <section
       role='alert'

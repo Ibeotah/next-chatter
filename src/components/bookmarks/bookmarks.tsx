@@ -15,12 +15,6 @@ export const BookmarkButton = ({ postId }: BookmarkButtonProps) => {
   const { isBookmarked, isLoading, toggleBookmark } = useBookmark(postId);
   const { isProfileComplete, isAuthLoading } = useProfileGuard();
 
-  /*
-   * STATE 1 — Auth still resolving after refresh.
-   * Render a neutral placeholder that matches the button's dimensions
-   * so there is zero layout shift when auth resolves.
-   * aria-hidden so screen readers skip it entirely during loading.
-   */
   if (isAuthLoading) {
     return (
       <div
@@ -30,14 +24,6 @@ export const BookmarkButton = ({ postId }: BookmarkButtonProps) => {
     );
   }
 
-  /*
-   * STATE 2 — Auth resolved, profile confirmed incomplete.
-   * Render a Link to /profile so keyboard users can act on the hint.
-   * We use a Link rather than a disabled button because disabled buttons
-   * give no affordance — the Link explains WHERE to go to fix the issue.
-   * text-slate-300 is intentionally low contrast here because the button
-   * is decorative/disabled — the aria-label carries the full meaning.
-   */
   if (isProfileComplete === false) {
     return (
       <Link
@@ -56,12 +42,6 @@ export const BookmarkButton = ({ postId }: BookmarkButtonProps) => {
     );
   }
 
-  /*
-   * STATE 3 — Auth resolved, profile complete.
-   * Full interactive bookmark button.
-   * text-brand-primary on white → 4.56:1 ✅
-   * text-slate-600 on white → 5.91:1 ✅
-   */
   return (
     <button
       type='button'

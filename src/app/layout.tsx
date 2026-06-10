@@ -11,21 +11,9 @@ import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
-/**
- * Global metadata — inherited by every page as defaults.
- * Individual pages override specific fields via their own
- * export const metadata or generateMetadata function.
- *
- * metadataBase is REQUIRED for Next.js to resolve relative
- * URLs in openGraph.images and twitter.images correctly.
- */
 export const metadata: Metadata = {
   // metadataBase makes all relative image paths absolute
   metadataBase: new URL(SITE_URL),
-
-  // Title template: individual pages set their own title,
-  // which gets injected where %s appears.
-  // Fallback renders when a page exports no title at all.
   title: {
     template: `%s | ${SITE_NAME}`,
     default: `${SITE_NAME} — Where Great Writing Lives`,

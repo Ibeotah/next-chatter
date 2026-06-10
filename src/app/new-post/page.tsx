@@ -11,26 +11,12 @@ import { AutosaveStatus, EditingPost } from "@/types";
 import { useAuth } from "@/context/auth-context";
 import { X } from "lucide-react";
 
-/*
- * React.lazy — App Router idiomatic code splitting.
- * The editor pulls in TipTap + StarterKit + Markdown (~120KB).
- * Lazy-loading means that bundle is only downloaded when the
- * component is actually needed, not on initial page load.
- *
- * Named export → must unwrap with .then(mod => ({ default: mod.X }))
- * This is the standard pattern for lazy + named exports.
- */
 const PostContentEditor = lazy(() =>
   import("@/components/editor/postContentEditor").then((mod) => ({
     default: mod.PostContentEditor,
   })),
 );
 
-/*
- * Editor loading skeleton shown by Suspense while the
- * PostContentEditor bundle is being downloaded.
- * Defined outside the component so it is never recreated on render.
- */
 function EditorSkeleton() {
   return (
     <div
@@ -187,11 +173,6 @@ export default function NewPostPage() {
         id='posts-management'
         aria-label='Your posts management'
         className='border-t border-slate-200 pt-12'>
-        {/*
-         * h2 — correct heading level.
-         * The page-level h1 is in the layout/nav ("Create Post" nav item).
-         * slate-900 on white → 17.85:1 ✅
-         */}
         <h2 className='text-2xl font-bold mb-6 text-slate-900'>
           Your Posts Management
         </h2>
@@ -236,19 +217,10 @@ export default function NewPostPage() {
 
         {/* Posts grid */}
         {!isReallyLoading && posts && posts.length > 0 && (
-          /*
-           * <ul> + <li> — SRs announce "list, N items" giving
-           * users an immediate count before navigating into items.
-           */
           <ul
             className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'
             aria-label={`${posts.length} post${posts.length === 1 ? "" : "s"}`}>
             {posts.map((post) => (
-              /*
-               * li.flex is required for the PostCard height-uniformity fix.
-               * PostCard is article.h-full.flex-col inside this flex li,
-               * which makes every card stretch to the tallest in the row.
-               */
               <li key={post.id} className='flex'>
                 <PostCard
                   post={post}
