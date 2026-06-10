@@ -1,3 +1,5 @@
+"use client";
+
 import { AlertTriangle, RefreshCw, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
