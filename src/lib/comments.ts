@@ -16,7 +16,7 @@ export async function fetchComments(postId: string): Promise<CommentNode[]> {
     .order("created_at", { ascending: true });
 
   if (error) throw error;
-  console.log("FLAT COMMENTS:", data);
+  // console.log("FLAT COMMENTS:", data);
   return buildCommentTree(data);
 }
 

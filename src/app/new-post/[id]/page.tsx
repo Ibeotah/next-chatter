@@ -16,7 +16,7 @@ export async function generateMetadata({
   const { id } = await params;
   const post = await getPostById(id);
 
-  console.log("Generating metadata for post:", post?.title); // Should appear in terminal
+  // console.log("Generating metadata for post:", post?.title); 
 
   if (!post) {
     return {
@@ -26,7 +26,7 @@ export async function generateMetadata({
   }
 
   const meta = buildPostMeta(post);
-  console.log("Built metadata:", meta.openGraph?.title); // Should show the title
+  // console.log("Built metadata:", meta.openGraph?.title); // Should show the title
 
   return meta;
 }

@@ -98,8 +98,8 @@ export default function MainNavigation({
       setIsLoggingOut(true);
       await signOut();
       window.location.href = "/";
-    } catch (error) {
-      console.error("Sign out failed:", error);
+    } catch (_error) {
+      // console.error("Sign out failed:", error);
     } finally {
       setIsLoggingOut(false);
     }
