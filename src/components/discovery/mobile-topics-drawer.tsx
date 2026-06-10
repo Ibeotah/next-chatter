@@ -19,7 +19,7 @@ interface MobileTopicsDrawerProps {
   context: MobileTopicsDrawerContext;
 }
 
- function MobileTopicsDrawer({ context }: MobileTopicsDrawerProps) {
+export function MobileTopicsDrawer({ context }: MobileTopicsDrawerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const drawerId = useId();
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -41,11 +41,11 @@ interface MobileTopicsDrawerProps {
   const followedCount = context.followedTags.length;
 
   return (
-    <div className="w-full">
+    <div className='w-full'>
       {/* ── Trigger button ── */}
       <button
         ref={triggerRef}
-        type="button"
+        type='button'
         onClick={() => setIsOpen((prev) => !prev)}
         aria-expanded={isOpen}
         aria-controls={drawerId}
@@ -58,12 +58,11 @@ interface MobileTopicsDrawerProps {
           "focus-visible:outline-none focus-visible:ring-2",
           "focus-visible:ring-brand-primary focus-visible:ring-offset-2",
           "cursor-pointer",
-        )}
-      >
-        <div className="flex items-center gap-2">
-          <Tags className="h-4 w-4 text-brand-primary" aria-hidden="true" />
+        )}>
+        <div className='flex items-center gap-2'>
+          <Tags className='h-4 w-4 text-brand-primary' aria-hidden='true' />
           {/* slate-800 on white = 10.7:1 ✅ AAA */}
-          <span className="text-sm font-semibold text-slate-800">
+          <span className='text-sm font-semibold text-slate-800'>
             Explore Topics
           </span>
 
@@ -71,13 +70,12 @@ interface MobileTopicsDrawerProps {
           {followedCount > 0 && (
             <span
               aria-label={`${followedCount} topics followed`}
-              className="
+              className='
                 inline-flex items-center justify-center
                 h-5 min-w-[1.25rem] px-1
                 bg-brand-primary text-white
                 text-[10px] font-bold rounded-full
-              "
-            >
+              '>
               {followedCount}
             </span>
           )}
@@ -89,26 +87,25 @@ interface MobileTopicsDrawerProps {
             "h-4 w-4 text-slate-500 transition-transform duration-200",
             isOpen && "rotate-180",
           )}
-          aria-hidden="true"
+          aria-hidden='true'
         />
       </button>
 
       {/* ── Collapsible drawer panel ── */}
-      
+
       <div
         id={drawerId}
-        role="region"
-        aria-label="Topics to explore and follow"
+        role='region'
+        aria-label='Topics to explore and follow'
         className={cn(
           "overflow-hidden transition-all duration-300 ease-in-out",
           isOpen ? "max-h-[70vh] mt-3" : "max-h-0",
-        )}
-      >
+        )}>
         {/*
          * Inner scroll container so the drawer never exceeds 70vh.
          * ExploreTopics is reused directly — same component as desktop.
          */}
-        <div className="overflow-y-auto max-h-[70vh] rounded-xl border border-slate-200 bg-white shadow-sm p-4">
+        <div className='overflow-y-auto max-h-[70vh] rounded-xl border border-slate-200 bg-white shadow-sm p-4'>
           <ExploreTopics context={context} />
         </div>
       </div>
