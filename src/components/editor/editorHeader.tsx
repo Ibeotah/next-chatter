@@ -28,7 +28,7 @@ const statusConfig = {
   saved: {
     pill: "text-emerald-700 bg-emerald-50 border-emerald-200 font-medium",
     dot: "bg-emerald-500",
-    text: "Saved to Supabase",
+    text: "Changes Saved Successfully",
     icon: (
       <CheckCircle2
         className='h-3.5 w-3.5 text-emerald-700'
