@@ -67,17 +67,18 @@ export function MobileHeader({
       </header>
 
       {/* ── Search bar ── */}
-      <search aria-label='Search Chatter' className='px-4 pb-3'>
-        <div className='relative'>
-          <Search
-            className='absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500'
-            aria-hidden='true'
-          />
-          <input
-            type='search'
-            placeholder='Search stories, writers, topics…'
-            aria-label='Search stories, writers, and topics'
-            className='
+      {userId && (
+        <search aria-label='Search Chatter' className='px-4 pb-3'>
+          <div className='relative'>
+            <Search
+              className='absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500'
+              aria-hidden='true'
+            />
+            <input
+              type='search'
+              placeholder='Search stories, writers, topics…'
+              aria-label='Search stories, writers, and topics'
+              className='
               w-full bg-slate-50 border border-slate-300 rounded-lg
               pl-10 pr-4 py-2 text-sm text-slate-900
               placeholder:text-slate-500
@@ -85,11 +86,12 @@ export function MobileHeader({
               focus-visible:ring-2 focus-visible:ring-brand-primary
               transition-colors
             '
-            value={inputValue}
-            onChange={(e) => onInputChange(e.target.value)}
-          />
-        </div>
-      </search>
+              value={inputValue}
+              onChange={(e) => onInputChange(e.target.value)}
+            />
+          </div>
+        </search>
+      )}
     </div>
   );
 }

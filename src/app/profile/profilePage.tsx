@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
-import { formatName } from "@/lib/utils";
+import { formatName, getInitials } from "@/lib/utils";
 import { useProfileStats } from "@/hooks/useFollows";
 import { ProfilePageSkeleton } from "@/components/profile/profile-page-skeleton";
 import { ProfilePageError } from "@/components/profile/profile-page-error";
@@ -92,7 +92,7 @@ export default function UserProfilePage() {
                 alt={`${displayName}'s profile picture`}
               />
               <AvatarFallback className='text-lg font-bold bg-slate-100 text-slate-700'>
-                {profile?.name ? formatName(profile.name) : "N/A"}
+                 {profile?.name ? getInitials(profile.name) : "N/A"}
               </AvatarFallback>
             </Avatar>
 

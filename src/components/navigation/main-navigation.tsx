@@ -99,7 +99,6 @@ export default function MainNavigation({
       await signOut();
       window.location.href = "/";
     } catch (_error) {
-      // console.error("Sign out failed:", error);
     } finally {
       setIsLoggingOut(false);
     }
@@ -147,52 +146,62 @@ export default function MainNavigation({
         Skip to main content
       </a>
 
-      <div className='flex min-h-screen flex-col md:flex-row'>
+      <div
+        className={`flex min-h-screen flex-col md:flex-row ${user?.id ? "bg-white" : "bg-brand-primary"}`}>
         {/* Mobile header — lazy loaded, skeleton prevents layout shift */}
-        <Suspense fallback={<MobileHeaderSkeleton />}>
-          <MobileHeader
-            pathname={pathname}
-            userDisplayName={userDisplayName}
-            userAvatarUrl={userAvatarUrl}
-            userInitials={userInitials}
-            userId={user?.id}
-            onSignOut={handleSignOut}
-            inputValue={inputValue}
-            onInputChange={setInputValue}
-          />
-        </Suspense>
+
+        {user?.id && (
+          <Suspense fallback={<MobileHeaderSkeleton />}>
+            <MobileHeader
+              pathname={pathname}
+              userDisplayName={userDisplayName}
+              userAvatarUrl={userAvatarUrl}
+              userInitials={userInitials}
+              userId={user?.id}
+              onSignOut={handleSignOut}
+              inputValue={inputValue}
+              onInputChange={setInputValue}
+            />
+          </Suspense>
+        )}
 
         {/* Desktop sidebar — lazy loaded, skeleton holds the space */}
-        <Suspense fallback={<SidebarSkeleton />}>
-          <SidebarNav
-            pathname={pathname}
-            userDisplayName={userDisplayName}
-            userAvatarUrl={userAvatarUrl}
-            userInitials={userInitials}
-            onSignOut={handleSignOut}
-          />
-        </Suspense>
+        {user?.id && (
+          <Suspense fallback={<SidebarSkeleton />}>
+            <SidebarNav
+              pathname={pathname}
+              userDisplayName={userDisplayName}
+              userAvatarUrl={userAvatarUrl}
+              userInitials={userInitials}
+              onSignOut={handleSignOut}
+            />
+          </Suspense>
+        )}
 
         <main
           id='main-content'
           className='flex-1 flex flex-col min-w-0 pb-20 md:pb-0'
           tabIndex={-1}>
           {/* Top search bar — lazy loaded */}
-          <Suspense fallback={<TopBarSkeleton />}>
-            <TopBar
-              userId={user?.id}
-              inputValue={inputValue}
-              onInputChange={setInputValue}
-            />
-          </Suspense>
-
+          {user?.id && (
+            <Suspense fallback={<TopBarSkeleton />}>
+              <TopBar
+                userId={user?.id}
+                inputValue={inputValue}
+                onInputChange={setInputValue}
+              />
+            </Suspense>
+          )}
           <div className='flex-1 p-4 md:p-8 overflow-y-auto'>{children}</div>
         </main>
 
         {/* Mobile bottom nav — lazy loaded, fixed position so no layout shift */}
-        <Suspense fallback={null}>
-          <MobileBottomNav pathname={pathname} />
-        </Suspense>
+
+        {user?.id && (
+          <Suspense fallback={null}>
+            <MobileBottomNav pathname={pathname} />
+          </Suspense>
+        )}
       </div>
     </>
   );
