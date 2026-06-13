@@ -202,7 +202,9 @@ export default function AuthPage() {
               onValueChange={handleTabChange}
               className='w-full space-y-4'>
               <TabsList
-                className='grid grid-cols-2 bg-slate-100 p-1 rounded-xl border border-slate-200/40'
+                className='grid grid-cols-2 
+                bg-slate-100
+                 rounded-xl border border-slate-200/40 pb-8'
                 aria-label='Authentication options'>
                 <TabsTrigger
                   value='login'
@@ -213,7 +215,7 @@ export default function AuthPage() {
                     data-[state=active]:shadow-sm
                     focus-visible:ring-2 focus-visible:ring-brand-primary
                     focus-visible:ring-offset-1
-                  '>
+                 '>
                   Sign In
                 </TabsTrigger>
                 <TabsTrigger

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -49,7 +49,7 @@ export const SignInForm = ({
             type='email'
             placeholder='name@domain.com'
             autoComplete='email'
-            className='pl-10 h-10 border-slate-300 placeholder:text-slate-500 focus-visible:ring-2 focus-visible:ring-brand-primary'
+            className='pl-10 h-10 border-slate-300 placeholder:text-slate-500/50 focus-visible:ring-2 focus-visible:ring-brand-primary'
             disabled={pending}
             required
             aria-required='true'
@@ -88,7 +88,7 @@ export const SignInForm = ({
             type='password'
             placeholder='••••••••'
             autoComplete='current-password'
-            className='pl-10 h-10 border-slate-300 placeholder:text-slate-500 focus-visible:ring-2 focus-visible:ring-brand-primary'
+            className='pl-10 h-10 border-slate-300 placeholder:text-slate-500/50  focus-visible:ring-2 focus-visible:ring-brand-primary'
             disabled={pending}
             required
             aria-required='true'

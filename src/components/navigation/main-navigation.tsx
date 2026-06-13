@@ -99,7 +99,6 @@ export default function MainNavigation({
       await signOut();
       window.location.href = "/";
     } catch (_error) {
-    } finally {
       setIsLoggingOut(false);
     }
   };

@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { NAV_LINKS } from "./nav-links";
+import { useState } from "react";
 
 interface MobileDrawerProps {
   pathname: string;
@@ -19,8 +20,9 @@ interface MobileDrawerProps {
 }
 
 export function MobileDrawer({ pathname, onSignOut }: MobileDrawerProps) {
+  const [open, setOpen] = useState(false);
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button
           variant='ghost'
@@ -53,6 +55,7 @@ export function MobileDrawer({ pathname, onSignOut }: MobileDrawerProps) {
                   key={href}
                   href={href}
                   aria-current={isActive ? "page" : undefined}
+                  onClick={() => setOpen(false)}
                   className={`
                     flex items-center gap-3 px-4 py-3 rounded-lg
                     font-medium text-sm transition-colors

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -43,7 +43,7 @@ export const EditProfileForm = ({ profile, onUpdate, onClose }: any) => {
 
     if (isUnchanged) {
       toast.info("No changes detected.");
-      onClose(); 
+      onClose();
       return;
     }
 
@@ -90,7 +90,7 @@ export const EditProfileForm = ({ profile, onUpdate, onClose }: any) => {
           id='name'
           {...register("name", { required: "Full name is required" })}
           placeholder='Isa Muhammad'
-          className={errors.name ? "border-red-500" : ""}
+          className={`${errors.name ? "border-red-500" : ""} placeholder:text-slate-500/50`}
         />
         {errors.name && (
           <p className='text-xs text-red-500'>
@@ -107,6 +107,7 @@ export const EditProfileForm = ({ profile, onUpdate, onClose }: any) => {
           id='username'
           {...register("username")}
           placeholder='IMuhammed'
+          className='placeholder:text-slate-500/50'
         />
       </div>
 
@@ -121,6 +122,7 @@ export const EditProfileForm = ({ profile, onUpdate, onClose }: any) => {
           id='edit-phone'
           {...register("phone")}
           placeholder='+234 801 234 5678'
+          className='placeholder:text-slate-500/50'
         />
       </div>
 
@@ -135,6 +137,7 @@ export const EditProfileForm = ({ profile, onUpdate, onClose }: any) => {
           id='edit-location'
           {...register("location")}
           placeholder='Lagos, Nigeria'
+          className='placeholder:text-slate-500/50'
         />
       </div>
 
@@ -149,7 +152,7 @@ export const EditProfileForm = ({ profile, onUpdate, onClose }: any) => {
           id='edit-social'
           {...register("social_links", { required: "Social link is required" })}
           placeholder='https://twitter.com/...'
-          className={errors.social_links ? "border-red-500" : ""}
+          className={`${errors.social_links ? "border-red-500" : ""} placeholder:text-slate-500/50`}
         />
         {errors.social_links && (
           <p className='text-xs text-red-500'>
@@ -167,7 +170,7 @@ export const EditProfileForm = ({ profile, onUpdate, onClose }: any) => {
           id='edit-bio'
           {...register("bio")}
           placeholder='Tell us a little bit about yourself...'
-          className='min-h-[100px]'
+          className='min-h-[100px] placeholder:text-slate-500/50'
         />
       </div>
 
